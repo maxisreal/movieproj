@@ -33,18 +33,20 @@ public class MovieCollection {
             }
         }
     }
-    private String searchTitles(){
+    private void searchTitles(){
         System.out.print("Type any title: ");
         String title = scan.nextLine();
         String returnString = "";
+        Movie[] movielist = new Movie[movies.size()];
         int a = 1;
         for (Movie movie : movies){
-            if (movie.toString().contains(title)){
+            if (movie.getTitle().contains(title)){
+                movielist[a-1] = movie;
                 returnString += a + ". " + movie.getTitle() + "\n";
                 a++;
             }
         }
-        return returnString;
+        System.out.println(returnString);
     }
 
     private static void loadWordsInto(ArrayList<Movie> movies) {
