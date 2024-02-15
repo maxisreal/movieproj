@@ -14,7 +14,7 @@ public class Movie {
         rating  = e;
         runtime = f;
     }
-    public String toString(){
+    public String getTitle(){
         return title;
     }
     public String getCast(){

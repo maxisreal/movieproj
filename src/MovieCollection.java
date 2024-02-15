@@ -40,7 +40,7 @@ public class MovieCollection {
         int a = 1;
         for (Movie movie : movies){
             if (movie.toString().contains(title)){
-                returnString += a + ". " + movie.toString() + "\n";
+                returnString += a + ". " + movie.getTitle() + "\n";
                 a++;
             }
         }
