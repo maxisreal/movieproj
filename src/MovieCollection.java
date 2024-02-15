@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class MovieCollection {
     private ArrayList<Movie> movies = new ArrayList<>();
+    private final Scanner scan = new Scanner(System.in);
     public MovieCollection(){
         loadWordsInto(movies);
         start();
     }
     private void start(){
-        Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to the movie collection!");
         String menuOption = "";
 
@@ -23,7 +23,7 @@ public class MovieCollection {
             menuOption = scan.nextLine();
 
             if (menuOption.equals("t")) {
-                //searchTitles();
+                searchTitles();
             } else if (menuOption.equals("c")) {
                 //searchCast();
             } else if (menuOption.equals("q")) {
@@ -32,6 +32,19 @@ public class MovieCollection {
                 System.out.println("Invalid choice!");
             }
         }
+    }
+    private String searchTitles(){
+        System.out.print("Type any title: ");
+        String title = scan.nextLine();
+        String returnString = "";
+        int a = 1;
+        for (Movie movie : movies){
+            if (movie.toString().contains(title)){
+                returnString += a + ". " + movie.toString() + "\n";
+                a++;
+            }
+        }
+        return returnString;
     }
 
     private static void loadWordsInto(ArrayList<Movie> movies) {
