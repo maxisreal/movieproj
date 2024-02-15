@@ -23,7 +23,7 @@ public class MovieCollection {
             menuOption = scan.nextLine();
 
             if (menuOption.equals("t")) {
-                System.out.println(searchTitles());
+                searchTitles();
             } else if (menuOption.equals("c")) {
                 //searchCast();
             } else if (menuOption.equals("q")) {
@@ -45,6 +45,9 @@ public class MovieCollection {
                 returnString += a + ". " + movie.getTitle() + "\n";
                 a++;
             }
+        }
+        if (returnString.equals("")){
+            returnString = "No movies found.";
         }
         System.out.println(returnString);
     }
