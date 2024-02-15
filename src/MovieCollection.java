@@ -23,7 +23,7 @@ public class MovieCollection {
             menuOption = scan.nextLine();
 
             if (menuOption.equals("t")) {
-                searchTitles();
+                System.out.println(searchTitles());
             } else if (menuOption.equals("c")) {
                 //searchCast();
             } else if (menuOption.equals("q")) {
