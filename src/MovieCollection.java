@@ -7,7 +7,7 @@ public class MovieCollection {
     private ArrayList<Movie> movies;
     public MovieCollection(){
         loadWordsInto(movies);
-
+        System.out.println(movies);
     }
     public static void loadWordsInto(ArrayList<Movie> movies) {
         try {
