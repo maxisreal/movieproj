@@ -7,9 +7,34 @@ public class MovieCollection {
     private ArrayList<Movie> movies = new ArrayList<>();
     public MovieCollection(){
         loadWordsInto(movies);
-        System.out.println(movies);
+        start();
     }
-    public static void loadWordsInto(ArrayList<Movie> movies) {
+    private void start(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to the movie collection!");
+        String menuOption = "";
+
+        while (!menuOption.equals("q")) {
+            System.out.println("------------ Main Menu ----------");
+            System.out.println("- search (t)itles");
+            System.out.println("- search (c)ast");
+            System.out.println("- (q)uit");
+            System.out.print("Enter choice: ");
+            menuOption = scan.nextLine();
+
+            if (menuOption.equals("t")) {
+                //searchTitles();
+            } else if (menuOption.equals("c")) {
+                //searchCast();
+            } else if (menuOption.equals("q")) {
+                System.out.println("Goodbye!");
+            } else {
+                System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    private static void loadWordsInto(ArrayList<Movie> movies) {
         try {
             Scanner input = new Scanner(new File("src\\movies_data.csv"));
             input.nextLine();
