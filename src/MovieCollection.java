@@ -35,22 +35,53 @@ public class MovieCollection {
     }
     private void searchTitles(){
         System.out.print("Type any title: ");
-        String title = scan.nextLine();
+        String title = scan.nextLine().toLowerCase();
         String returnString = "";
-        Movie[] movielist = new Movie[movies.size()];
-        int a = 1;
+        ArrayList<Movie> movielist = new ArrayList<>();
         for (Movie movie : movies){
-            if (movie.getTitle().contains(title)){
-                movielist[a-1] = movie;
-                returnString += a + ". " + movie.getTitle() + "\n";
-                a++;
+            if (movie.getTitle().toLowerCase().contains(title)){
+                movielist.add(movie);
             }
+        }
+        int a = 1;
+        insertionSort(movielist);
+        for (Movie movie : movielist){
+            returnString += a + ". " + movie.getTitle() + "\n";
+            a++;
         }
         if (returnString.equals("")){
             returnString = "No movies found.";
         }
         System.out.println(returnString);
+        a = -1;
+        while (a == -1 && !returnString.equals("No movies found.")) {
+            System.out.print("Which movie interests you?\nEnter number: ");
+            a = scan.nextInt();
+            if (movielist.get(a-1) != null) {
+                System.out.println(movielist.get(a-1).getInfo());
+            } else {
+                System.out.println("Movie not found, try again.");
+            }
+            scan.nextLine();
+        }
+        System.out.print("Press ENTER");
+        scan.nextLine();
     }
+    private void insertionSort(ArrayList<Movie> elements) {
+        // TODO: Part A: implement me using an outer FOR loop and an inner WHILE loop
+        for (int i = 0; i<elements.size(); i++){
+            int a = 0;
+            while (a<i) {
+                if (elements.get(i).getTitle().compareTo(elements.get(a).getTitle())<0) {
+                    Movie temp = elements.get(i);
+                    elements.set(i, elements.get(a));
+                    elements.set(a, temp);
+                }
+                a++;
+            }
+        }
+    }
+
 
     private static void loadWordsInto(ArrayList<Movie> movies) {
         try {

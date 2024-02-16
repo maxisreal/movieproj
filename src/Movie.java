@@ -33,4 +33,16 @@ public class Movie {
         return runtime;
     }
 
+    public String getInfo(){
+        String[] temp = getOverview().split("\\.");
+        String last = "";
+        for (String a : temp){
+            last += a + ".\n";
+        }
+        String cast = getCast();
+        while (cast.contains("|")){
+            cast = cast.substring(0, cast.indexOf("|")) + ", " + cast.substring(cast.indexOf("|") + 1);
+        }
+        return "Title: " + getTitle() + "\nRuntime: " + getRuntime() + " minutes\nDirected by: " + getDirector() + "\nCast: " + cast + "\nOverview: " + last + "User Rating: " + getRating();
+    }
 }
