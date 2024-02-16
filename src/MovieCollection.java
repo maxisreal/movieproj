@@ -69,9 +69,10 @@ public class MovieCollection {
             if (a < movielist.size() && movielist.get(a) != null) {
                 int count = 1;
                 for (Movie movie : movielist){
-                    if (movie.getCast().toLowerCase().contains(names[a].toLowerCase()))
-                    System.out.println(count + ". " + movie.getTitle());
-                    count++;
+                    if (movie.getCast().toLowerCase().contains(names[a].toLowerCase())) {
+                        System.out.println(count + ". " + movie.getTitle());
+                        count++;
+                    }
                 }
             }
             System.out.print("Which movie interests you?\nEnter number: ");
