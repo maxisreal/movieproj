@@ -25,13 +25,16 @@ public class MovieCollection {
             if (menuOption.equals("t")) {
                 searchTitles();
             } else if (menuOption.equals("c")) {
-                //searchCast();
+                searchCast();
             } else if (menuOption.equals("q")) {
                 System.out.println("Goodbye!");
             } else {
                 System.out.println("Invalid choice!");
             }
         }
+    }
+    private void searchCast(){
+
     }
     private void searchTitles(){
         System.out.print("Type any title: ");
@@ -64,7 +67,7 @@ public class MovieCollection {
             }
             scan.nextLine();
         }
-        System.out.print("Press ENTER ");
+        System.out.println("Press ENTER ");
         scan.nextLine();
     }
     private void insertionSort(ArrayList<Movie> elements) {
