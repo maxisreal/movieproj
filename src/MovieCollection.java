@@ -34,6 +34,68 @@ public class MovieCollection {
         }
     }
     private void searchCast(){
+        System.out.print("Who are you looking for? -> ");
+        String search = scan.nextLine().toLowerCase();
+        ArrayList<Movie> movielist = new ArrayList<>();
+        String returnString = "";
+        for (Movie movie : movies){
+            String[] names = movie.getCast().split(", ");
+            for (String name : names){
+                if (name.toLowerCase().contains(search)){
+                    movielist.add(movie);
+                    returnString += name + "\n";
+                }
+            }
+        }
+        String[] names = returnString.split("\n");
+        insertionSortArray(names);
+        returnString = "";
+        int a = 1;
+        for (String name : names) {
+            if (!returnString.contains(name)){
+                returnString += a + ". " + name + "\n";
+                a++;
+            }
+        }
+        if (returnString.equals("")){
+            returnString = "No people found.";
+        }
+        System.out.println(returnString);
+        insertionSort(movielist);
+        if (!returnString.equals("No people found.")) {
+            System.out.print("Which person do you want to see the movies of? -> ");
+            a = scan.nextInt()-1;
+            scan.nextLine();
+            if (a < movielist.size() && movielist.get(a) != null) {
+                int count = 1;
+                for (Movie movie : movielist){
+                    if (movie.getCast().toLowerCase().contains(names[a].toLowerCase()))
+                    System.out.println(count + ". " + movie.getTitle());
+                    count++;
+                }
+            }
+            System.out.print("Which movie interests you?\nEnter number: ");
+            a = scan.nextInt();
+            scan.nextLine();
+            if (a < movielist.size() && movielist.get(a - 1) != null) {
+                System.out.println(movielist.get(a - 1).getInfo());
+            } else {
+                System.out.println("Movie not found.");
+            }
+        }
+        System.out.println("Press ENTER ");
+        scan.nextLine();
+    }
+    private void insertionSortArray(String[] words){
+        for (int i = 1; i<words.length; i++){
+            String temp = words[i];
+            int a = i;
+            while (a>0 && temp.compareTo(words[a-1]) < 0) {
+                words[a] = words[a-1];
+                a--;
+            }
+            words[a] = temp;
+        }
 
     }
     private void searchTitles(){
@@ -56,16 +118,15 @@ public class MovieCollection {
             returnString = "No movies found.";
         }
         System.out.println(returnString);
-        a = -1;
-        while (a == -1 && !returnString.equals("No movies found.")) {
-            System.out.print("Which movie interests you?\nEnter number: ");
-            a = scan.nextInt();
-            if (movielist.get(a-1) != null) {
-                System.out.println(movielist.get(a-1).getInfo());
-            } else {
-                System.out.println("Movie not found, try again.");
-            }
-            scan.nextLine();
+        if (!returnString.equals("No movies found.")) {
+                System.out.print("Which movie interests you?\nEnter number: ");
+                a = scan.nextInt();
+                scan.nextLine();
+                if (a < movielist.size() && movielist.get(a - 1) != null) {
+                    System.out.println(movielist.get(a - 1).getInfo());
+                } else {
+                    System.out.println("Movie not found.");
+                }
         }
         System.out.println("Press ENTER ");
         scan.nextLine();
