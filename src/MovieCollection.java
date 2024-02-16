@@ -64,7 +64,7 @@ public class MovieCollection {
             }
             scan.nextLine();
         }
-        System.out.print("Press ENTER");
+        System.out.print("Press ENTER ");
         scan.nextLine();
     }
     private void insertionSort(ArrayList<Movie> elements) {
@@ -90,7 +90,11 @@ public class MovieCollection {
             while (input.hasNext()) {
                 String data = input.nextLine();
                 String[] splitData = data.split(",");
-                Movie m1 = new Movie(splitData[0], splitData[1], splitData[2], splitData[3], Double.parseDouble(splitData[5]), Integer.parseInt(splitData[4]));
+                String cast = splitData[1];
+                while (cast.contains("|")){
+                    cast = cast.substring(0, cast.indexOf("|")) + ", " + cast.substring(cast.indexOf("|") + 1);
+                }
+                Movie m1 = new Movie(splitData[0], cast, splitData[2], splitData[3], Double.parseDouble(splitData[5]), Integer.parseInt(splitData[4]));
                 movies.add(m1);
             }
 
