@@ -66,13 +66,19 @@ public class MovieCollection {
             System.out.print("Which person do you want to see the movies of? -> ");
             a = scan.nextInt()-1;
             scan.nextLine();
-            if (a < movielist.size() && movielist.get(a) != null) {
+            for (Movie movie : movielist){
+                String[] names2 = movie.getCast().split(", ");
+                for (String name : names2){
+                    if (name.toLowerCase().equals(names[a].toLowerCase())){
+                        movielist.add(movie);
+                    }
+                }
+            }
+            if () {
                 int count = 1;
                 for (Movie movie : movielist){
-                    if (movie.getCast().toLowerCase().contains(names[a].toLowerCase())) {
-                        System.out.println(count + ". " + movie.getTitle());
-                        count++;
-                    }
+                    System.out.println(count + ". " + movie.getTitle());
+                    count++;
                 }
             }
             System.out.print("Which movie interests you?\nEnter number: ");
