@@ -52,7 +52,6 @@ public class MovieCollection {
         insertionSortArray(names);
         returnString = "";
         int a = 1;
-        //todo: remove all dupes from names
         for (String name : names) {
             if (!returnString.contains(name)){
                 returnString += a + ". " + name + "\n";
@@ -145,7 +144,6 @@ public class MovieCollection {
         scan.nextLine();
     }
     private void insertionSort(ArrayList<Movie> elements) {
-        // TODO: Part A: implement me using an outer FOR loop and an inner WHILE loop
         for (int i = 0; i<elements.size(); i++){
             int a = 0;
             while (a<i) {
