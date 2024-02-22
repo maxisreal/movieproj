@@ -34,7 +34,7 @@ public class Movie {
     }
 
     public String getInfo(){
-        String[] temp = getOverview().split("\\.");
+        String[] temp = getOverview().split("\\. ");
         String last = "";
         for (String a : temp){
             last += a + ".\n";

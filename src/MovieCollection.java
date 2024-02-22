@@ -1,8 +1,7 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+
 public class MovieCollection {
     private ArrayList<Movie> movies = new ArrayList<>();
     private final Scanner scan = new Scanner(System.in);
@@ -43,7 +42,9 @@ public class MovieCollection {
             for (String name : names){
                 if (name.toLowerCase().contains(search)){
                     movielist.add(movie);
-                    returnString += name + "\n";
+                    if (!returnString.contains(name)) {
+                        returnString += name + "\n";
+                    }
                 }
             }
         }
@@ -51,6 +52,7 @@ public class MovieCollection {
         insertionSortArray(names);
         returnString = "";
         int a = 1;
+        //todo: remove all dupes from names
         for (String name : names) {
             if (!returnString.contains(name)){
                 returnString += a + ". " + name + "\n";
@@ -64,25 +66,31 @@ public class MovieCollection {
         insertionSort(movielist);
         if (!returnString.equals("No people found.")) {
             System.out.print("Which person do you want to see the movies of? -> ");
-            a = scan.nextInt()-1;
+            a = scan.nextInt();
             scan.nextLine();
-            for (Movie movie : movielist){
-                String[] names2 = movie.getCast().split(", ");
+            for (int i = 0; i<movielist.size(); i++){
+                String[] names2 = movielist.get(i).getCast().split(", ");
+                boolean variable = false;
                 for (String name : names2){
-                    if (name.toLowerCase().equals(names[a].toLowerCase())){
-                        movielist.add(movie);
+                    if (name.equalsIgnoreCase(names[a-1])) {
+                        variable = true;
                     }
                 }
-            }
-                int count = 1;
-                for (Movie movie : movielist){
-                    System.out.println(count + ". " + movie.getTitle());
-                    count++;
+                if (!variable) {
+                    movielist.remove(i);
+                    i--;
                 }
+
+            }
+            int count = 1;
+            for (Movie movie : movielist){
+                System.out.println(count + ". " + movie.getTitle());
+                count++;
+            }
             System.out.print("Which movie interests you?\nEnter number: ");
             a = scan.nextInt();
             scan.nextLine();
-            if (a < movielist.size() && movielist.get(a - 1) != null) {
+            if (a <= movielist.size() && movielist.get(a - 1) != null) {
                 System.out.println(movielist.get(a - 1).getInfo());
             } else {
                 System.out.println("Movie not found.");
@@ -127,7 +135,7 @@ public class MovieCollection {
                 System.out.print("Which movie interests you?\nEnter number: ");
                 a = scan.nextInt();
                 scan.nextLine();
-                if (a < movielist.size() && movielist.get(a - 1) != null) {
+                if (a <= movielist.size() && movielist.get(a - 1) != null) {
                     System.out.println(movielist.get(a - 1).getInfo());
                 } else {
                     System.out.println("Movie not found.");
@@ -163,7 +171,11 @@ public class MovieCollection {
                 while (cast.contains("|")){
                     cast = cast.substring(0, cast.indexOf("|")) + ", " + cast.substring(cast.indexOf("|") + 1);
                 }
-                Movie m1 = new Movie(splitData[0], cast, splitData[2], splitData[3], Double.parseDouble(splitData[5]), Integer.parseInt(splitData[4]));
+                String director = splitData[2];
+                while (director.contains("|")){
+                    director = director.substring(0, director.indexOf("|")) + ", " + director.substring(director.indexOf("|") + 1);
+                }
+                Movie m1 = new Movie(splitData[0], cast, director, splitData[3], Double.parseDouble(splitData[5]), Integer.parseInt(splitData[4]));
                 movies.add(m1);
             }
 
