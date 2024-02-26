@@ -45,9 +45,12 @@ public class MovieCollection {
                     if (!returnString.contains(name)) {
                         returnString += name + "\n";
                     }
+                    //todo: this method removes tom everett because tom everett scott is added before and the ifcontains sees that and doesn't add tom everett
+                    //todo: make returnString initialize from an array instead of an ifcontains statement
                 }
             }
         }
+        System.out.println(returnString);
         String[] names = returnString.split("\n");
         insertionSortArray(names);
         returnString = "";
